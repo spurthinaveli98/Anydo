@@ -1,0 +1,23 @@
+li {
+    color: #333;
+    background-color: rgba(255, 255, 255, .5);
+    padding-left: 5px;
+    font-family: Arial;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color .2s easy-out;
+  }
+
+  li:hover {
+    background-color:#e8e9ea ;
+    cursor: pointer;  
+  }
+  
+  ul.theList {
+    padding: 0;
+    font-family: Arial;
+  }
+  

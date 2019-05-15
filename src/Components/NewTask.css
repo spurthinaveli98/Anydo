@@ -1,0 +1,90 @@
+
+.modal {
+    position: fixed;
+    width: 100%;
+    top:0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+  }
+
+  .modal-main {
+    position:relative;
+    background:white;
+    border-radius: 15px;
+    width: 45%;
+    height: 450px;
+    margin: auto;
+    margin-top:250px;
+    top:70px;
+    left:330px;
+    box-shadow: 0px 0px 6px 0px #b8b5b4;
+    transform: translate(-50%, -50%);
+    
+  }
+
+  .modal-sidebar {
+    border-top-right-radius: 15px;
+    margin-top: 3px;
+    margin-left: 400px;
+    width: 38%;
+    height: calc( 100% - 46px );
+    position: absolute;
+    border:5px;
+  }
+
+  .modal-footer {
+    border: none;
+    position: absolute;
+    font-size: 30px;
+    top: calc( 100% - 46px );
+    left:0;
+    width: 568px;
+    height: 30px;
+    padding:8px;
+    box-shadow: 0px 0px 6px 0px #b8b5b4;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  
+  
+  .AddTask {
+    position:absolute;
+    background-color: white;
+    border: None;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 45%;
+    color: #42b7dd;
+  }
+
+.display-block {
+    display: block;
+  }
+  
+  .display-none {
+    display: none;
+  }
+  
+  /* .close {
+    background: url(pictures/closebutton.jpeg) 0 0 transparent;
+    border: medium none !important;
+    width: 40px;
+    height: 40px;
+    color: transparent;
+  }
+  .close:hover {
+    background: url(pictures/closebutton.jpeg) 0 -45px transparent;
+  } */
+
+  .close {
+    /* color:red; */
+    width: 25px;
+    height: 25px;
+    border-radius: 10%;
+    /* background-color:rgb(179, 171, 171); */
+    margin:15px;
+    margin-left:96%;
+    cursor: pointer;
+  }
+  

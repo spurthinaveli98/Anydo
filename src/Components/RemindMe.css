@@ -1,0 +1,41 @@
+  
+  .Task1:hover {
+    background-color:#e8e9ea;
+    cursor: pointer;
+  }
+  
+  .Card1 {
+    position: relative;
+    font-size: 16px;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 1px #b8b5b4;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
+    border-radius: 4px;
+  }
+  .Task1 {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+ 
+  .Task1Press {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(102, 192, 214);
+  }
+  
+  .li{
+  cursor: pointer;
+  }
+  
+  .Task1:active {
+    color: red;
+  }
