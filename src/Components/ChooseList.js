@@ -5,18 +5,21 @@ const ChooseList =function(props){
 
 
     const createTasks=function(item){
-      var listName = item.list;  
-        return <li onClick={props.param1.bind(this,item.list)}
-        key={item.key}  className={props.status === {listName} ? 'liSelected': 'li' }>{item.list}</li>
+      var listName = item.list;
+      console.log("----------"+listName);
+      console.log(props.status);  
+      console.log(props.status === listName)
+        return <div onClick={props.param1.bind(this,item.list)}
+        key={item.key}  className={props.status === listName ? 'Task2Press': 'Task2' }>{item.list}</div>
       }
 
       var todoEntries = props.entries;
     var listItems = todoEntries.map(createTasks);
 
     return(
-         <ul className="theList">
+         <div className="Card2">
       {listItems}
-      </ul>
+      </div>
     );
 }
 

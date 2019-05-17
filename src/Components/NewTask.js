@@ -12,7 +12,7 @@ class NewTask extends Component {
     }
     return (
       <div className={showHideClassName} >
-           <button className="close" onClick={this.props.handleAddTask}>X</button> 
+           <button className="close" onClick={this.props.closeAddTask}>X</button> 
         {/* need to add cross button to close the webpage */}
         <section className="modal-main">
         <div>

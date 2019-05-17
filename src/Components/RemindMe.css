@@ -2,6 +2,7 @@
   .Task1:hover {
     background-color:#e8e9ea;
     cursor: pointer;
+    color:red;
   }
   
   .Card1 {

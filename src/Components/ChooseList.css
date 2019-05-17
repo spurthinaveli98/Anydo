@@ -1,4 +1,4 @@
-li {
+ li {
     color: #333;
     background-color: rgba(255, 255, 255, .5);
     padding: 5px;
@@ -15,7 +15,7 @@ li {
     background-color:#e8e9ea ;
     cursor: pointer;
   }
-  
+  /*
   .liSelected {
     background-color: blue;
     color:red;
@@ -28,9 +28,50 @@ li {
     width:150px;
   }
 
-  ul.theList {
+   */
+
+  /* ul.theList {
     padding: 0;
     font-family: Arial;
-    /* overflow-y: scroll; */
+  } */
+  
+
+   .Card2 {
+    position: relative;
+    font-size: 16px;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 1px #b8b5b4;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
+    border-radius: 4px;
+    overflow-y: scroll;
+  }
+
+  .Task2 {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+ 
+  .Task2Press {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(102, 192, 214);
   }
   
+  .Task2:hover {
+    background-color:#e8e9ea;
+    cursor: pointer;
+    color:red;
+  }
+
+  .Task2:active {
+    color: red;
+  }

@@ -82,7 +82,7 @@ class Tasks extends Component {
 
           <div className="Card">
             <div className="Task" onClick={this.display.bind(this,"Today")}>
-            Today 
+            Today
             <div className="DisplayTasks">{this.state.Today}</div> 
             </div>
             <div className="Task" onClick={this.display.bind(this,"Tomorrow")}>
@@ -93,7 +93,7 @@ class Tasks extends Component {
             Someday
             <div className="DisplayTasks">{this.state.Someday}</div> 
             </div>
-            
+          
             
           </div>
        

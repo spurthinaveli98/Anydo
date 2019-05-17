@@ -6,11 +6,11 @@ import Tasks from './Components/Tasks';
 import ChooseList from './Components/ChooseList';
 import RemindMe from './Components/RemindMe';
 import NewTask from './Components/NewTask';
-
+import axios from 'axios';
 
 var tasks = "All Tasks";
 var currentKey="";
-var day = "Today";
+// var day = "Today";
 class TodoList extends Component {
 constructor(props) {
 super(props);
@@ -21,23 +21,8 @@ this.state = {
   showMenu: true,
   showNewList: false,
   daySelectedStatus: "",
- items:[
-     {
-       key:0,
-       list: "Personal",
-       DeadLines: { "Today": [], "Tomorrow": [], "Someday": []}
-     },
-     {
-      key:1,
-       list: "Work",
-       DeadLines: { "Today": [], "Tomorrow": [], "Someday": []}
-     },
-     {
-      key:2,
-       list: "GroceryList",
-       DeadLines: { "Today": [], "Tomorrow": [], "Someday": []}
-     }
- ]
+  listSelectedStatus: "",
+ items:[]
 };
 
 this.style = {
@@ -51,24 +36,65 @@ this.addItem=this.addItem.bind(this);
 this.displayItem=this.displayItem.bind(this);
 }
 
+async componentDidMount() {
+  const response = await fetch('/AnydoList');
+  const json = await response.json();
+  this.setState({ result: json });
+  var DeadLines= { Today: [], Tomorrow: [], Someday: []};
+  let result = this.state.result;
+  for(let i=0;i<result.length;i++){
+    var newItem = {
+      list: result[i].listName,
+      DeadLines: DeadLines,
+      key: result[i].listId
+    };
+    this.setState((prevState) => {
+      return {
+        items: prevState.items.concat(newItem)
+      };
+    });
+  }
+}
+
 addItem(e){
+var data;
      if(this._inputElement.value !== ""){
        var DeadLines= { Today: [], Tomorrow: [], Someday: []};
-      var newItem = {
-        list: this._inputElement.value,
-        DeadLines: DeadLines,
-        key: Date.now()
-      };
 
-      this.setState((prevState) => {
-        return {
-          items: prevState.items.concat(newItem)
-        };
-      });
+       data = {
+         "listName":this._inputElement.value
+       };
+
+      // var newItem = {
+      //   list: this._inputElement.value,
+      //   DeadLines: DeadLines,
+      //   key: Date.now()
+      // };
+
+      // this.setState((prevState) => {
+      //   return {
+      //     items: prevState.items.concat(newItem)
+      //   };
+      // });
     }
 
     this._inputElement.value = "";
     e.preventDefault();
+
+  let dataToSend = JSON.stringify(data);
+  const URL = `http://localhost:8080/AnydoList`;
+  
+  return axios(URL, {
+     method: 'POST',
+     headers: {
+       'content-type': 'application/json',
+     },
+     data: dataToSend,
+   })
+     .then(response => response.data)
+     .catch(error => {
+       throw error;
+     }); 
 }
 
 displayItem(list,key){
@@ -87,9 +113,28 @@ showListHandler = () => {
     this.setState({ showNewList: true });
   };
 
+closeTaskHandler = () => {
+  this.setState({ showNewList: false });
+  this.setState({daySelectedStatus: ""});
+  this.setState({listSelectedStatus: ""});
+  this._inputElement2.value="";
+}
+
 AddTaskHandler = () => {
+      var items = this.state.items.slice();
+      for(var i=0;i<items.length;i++){
+        if(items[i].list === this.state.listSelectedStatus){
+          items[i].DeadLines[this.state.daySelectedStatus].push(this._inputElement2.value);
+        }
+      }
+
+      this.setState({
+      items: items
+      });
       this.setState({ showNewList: false });
-      console.log(this.state.showNewList);
+      this.setState({daySelectedStatus: ""});
+      this.setState({listSelectedStatus: ""});
+      this._inputElement2.value="";
     };
 
     myList = () => {
@@ -100,23 +145,11 @@ AddTaskHandler = () => {
 
 
     param1 = (pa) => {
-      var items = this.state.items.slice();
-      for(var i=0;i<items.length;i++){
-        if(items[i].list == pa){
-          console.log(items[i].DeadLines);
-          items[i].DeadLines[day].push(this._inputElement2.value);
-        }
-      }
-
-      this.setState({
-      items: items
-      });
-      console.log(this.state.items);
+      this.setState({listSelectedStatus: pa});
     }
 
     param2 = (p) => {
       this.setState({daySelectedStatus: p});
-      day=p;
      }
 
 
@@ -127,7 +160,7 @@ AddTaskHandler = () => {
           menu = (
             <div className="content">
 
-            <h3 className="h3"><strong className="strong" onClick={this.myList.bind(this)}>MY LISTS </strong>&#x270D;</h3>
+            <h3 className="h3"> <strong className="strong" onClick={this.myList.bind(this)}>MY LISTS </strong>&#x270D;</h3>
              <DisplayList entries={this.state.items}
                            display={this.displayItem}/>
                 <form onSubmit={this.addItem}>
@@ -162,7 +195,7 @@ AddTaskHandler = () => {
           </div>
           <div className={this.state.showMenu?'right show-hmenu':'right show-fmenu'}>
      
-          <NewTask showNewList={this.state.showNewList} handleAddTask={this.AddTaskHandler.bind(this)}>
+          <NewTask showNewList={this.state.showNewList} handleAddTask={this.AddTaskHandler.bind(this)} closeAddTask={this.closeTaskHandler.bind(this)}>
           <input className="InputTask" placeholder="I want to.." ref={(b) => this._inputElement2 =b}/>
           <RemindMe param2={this.param2} status={this.state.daySelectedStatus}/>
           <ChooseList entries={this.state.items} param1={this.param1} status={this.state.listSelectedStatus}/>
