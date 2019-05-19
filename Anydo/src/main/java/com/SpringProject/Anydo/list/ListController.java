@@ -1,19 +1,18 @@
-package com.SpringProject.Anydo;
+package com.SpringProject.Anydo.list;
 
 import com.SpringProject.Anydo.model.AnydoList;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins="*")
 @RestController
-public class AnydoController {
+public class ListController {
 
     @Autowired
-    AnydoService anydoService;
+    ListService listService;
 
     @GetMapping("/api/hello")
     public String hello() {
@@ -22,16 +21,16 @@ public class AnydoController {
 
     @GetMapping(value = "/AnydoList")
     public List<AnydoList> getList() throws Exception{
-        List<AnydoList> allInfo = anydoService.getList();
+        List<AnydoList> allInfo = listService.getList();
         if(allInfo.isEmpty())
-            throw new NullPointerException("No Employees in the List");
+            throw new NullPointerException("List is Empty");
         return allInfo;
     }
 
     @PostMapping(value = "/AnydoList")
     public void addList(@RequestBody JsonNode json)throws Exception {
         try{
-            anydoService.addList(json);
+            listService.addList(json);
         }
         catch (NullPointerException e) {
             throw new NullPointerException("Incomplete Information");

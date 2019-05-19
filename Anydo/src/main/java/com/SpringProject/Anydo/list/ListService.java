@@ -1,4 +1,4 @@
-package com.SpringProject.Anydo;
+package com.SpringProject.Anydo.list;
 
 import com.SpringProject.Anydo.model.AnydoList;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,23 +8,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AnydoService {
+public class ListService {
 
     @Autowired
-    AnydoRepository anydoRepository;
+    ListRepository listRepository;
 
     public List<AnydoList> getList() {
 
-        return anydoRepository.findAll();
+        return listRepository.findAll();
     }
 
     public AnydoList addList(JsonNode json) {
-
-        AnydoList anydoList = new AnydoList();
+AnydoList anydoList = new AnydoList();
 
         String name = json.get("listName").asText();
         anydoList.setListName(name);
 
-        return anydoRepository.save(anydoList);
+        return listRepository.save(anydoList);
     }
 }
