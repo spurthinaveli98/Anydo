@@ -6,9 +6,6 @@ const ChooseList =function(props){
 
     const createTasks=function(item){
       var listName = item.list;
-      console.log("----------"+listName);
-      console.log(props.status);  
-      console.log(props.status === listName)
         return <div onClick={props.param1.bind(this,item.list)}
         key={item.key}  className={props.status === listName ? 'Task2Press': 'Task2' }>{item.list}</div>
       }

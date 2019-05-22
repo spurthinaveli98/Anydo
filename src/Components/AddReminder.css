@@ -1,0 +1,28 @@
+.AddReminder {
+    width: 103.3px;
+    height: 50px;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 5px;
+    font-family: Arial;
+    padding-left: 3px;
+    color: #4f4f4f; 
+  }
+
+  .AddReminderCard {
+    padding: 5px;
+    font-size: 12px;
+    width: 103.3px;
+    height: 50px;
+    background-color: white;
+    box-shadow: 0.5px 0.5px 0.5px #b8b5b4;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
+    border-radius: 1%;
+    align-content: center;
+  }
+
+  .AddReminderCard:hover {
+    background-color: #e7ecf1;
+    cursor: pointer;
+    }

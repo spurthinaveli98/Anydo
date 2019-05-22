@@ -20,6 +20,9 @@ this.state = {
   showpic: true,
   showMenu: true,
   showNewList: false,
+  showToday:false,
+  showTomorrow:false,
+  showSomeday:false,
   daySelectedStatus: "",
   listSelectedStatus: "",
  items:[]
@@ -37,17 +40,29 @@ this.displayItem=this.displayItem.bind(this);
 }
 
 async componentDidMount() {
-  const response = await fetch('/AnydoList');
+ const response = await fetch('/AnydoList');
   const json = await response.json();
   this.setState({ result: json });
-  var DeadLines= { Today: [], Tomorrow: [], Someday: []};
+  const responseOfItems = await fetch('/AnydoItem');
+  const jsonOfItems = await responseOfItems.json();
+  this.setState({item : jsonOfItems});
+  const responseOfSubTasks = await fetch('/AnydoSubTask');
+  const jsonOfSubTasks = await responseOfSubTasks.json();
+  this.setState({subTasks : jsonOfSubTasks});
   let result = this.state.result;
+  let item = this.state.item;
   for(let i=0;i<result.length;i++){
+    var DeadLines = { Today: [], Tomorrow: [], Someday: []};
     var newItem = {
-      list: result[i].listName,
-      DeadLines: DeadLines,
-      key: result[i].listId
-    };
+        list: result[i].listName,
+        DeadLines: DeadLines,
+        key: result[i].listId
+      };
+      for(let j=0;j<item.length;j++){
+        if(result[i].listId === item[j].listId){
+            newItem.DeadLines[item[j].dayName].push(item[j].itemName);
+        }
+      }
     this.setState((prevState) => {
       return {
         items: prevState.items.concat(newItem)
@@ -55,6 +70,7 @@ async componentDidMount() {
     });
   }
 }
+ 
 
 addItem(e){
 var data;
@@ -65,17 +81,17 @@ var data;
          "listName":this._inputElement.value
        };
 
-      // var newItem = {
-      //   list: this._inputElement.value,
-      //   DeadLines: DeadLines,
-      //   key: Date.now()
-      // };
+      var newItem = {
+        list: this._inputElement.value,
+        DeadLines: DeadLines,
+        key: Date.now()
+      };
 
-      // this.setState((prevState) => {
-      //   return {
-      //     items: prevState.items.concat(newItem)
-      //   };
-      // });
+      this.setState((prevState) => {
+        return {
+          items: prevState.items.concat(newItem)
+        };
+      });
     }
 
     this._inputElement.value = "";
@@ -98,10 +114,11 @@ var data;
 }
 
 displayItem(list,key){
+  
   tasks=list;
   currentKey=key;
-  console.log("t"+tasks+currentKey);
   this.setState({show: true });
+  
 }
 
 toggleMenuHandler = () => {
@@ -122,11 +139,19 @@ closeTaskHandler = () => {
 
 AddTaskHandler = () => {
       var items = this.state.items.slice();
+      var listId;
       for(var i=0;i<items.length;i++){
         if(items[i].list === this.state.listSelectedStatus){
           items[i].DeadLines[this.state.daySelectedStatus].push(this._inputElement2.value);
+          listId = items[i].key;
         }
       }
+
+      var data = {
+        "itemName":this._inputElement2.value,
+        "dayName":this.state.daySelectedStatus,
+        "listId":listId
+      };
 
       this.setState({
       items: items
@@ -135,6 +160,21 @@ AddTaskHandler = () => {
       this.setState({daySelectedStatus: ""});
       this.setState({listSelectedStatus: ""});
       this._inputElement2.value="";
+
+      let dataToSend = JSON.stringify(data);
+      const URL = `http://localhost:8080/AnydoItem`;
+
+      return axios(URL, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        data: dataToSend,
+      })
+        .then(response => response.data)
+        .catch(error => {
+          throw error;
+        }); 
     };
 
     myList = () => {
@@ -174,13 +214,18 @@ AddTaskHandler = () => {
            content = 
            <div>
             <Tasks 
-            taskName={tasks}
+            listName={tasks}
             currentKey={currentKey}
             items={this.state.items}
+            showToday={!this.state.showToday}
+            showTomorrow={!this.state.showTomorrow}
+            showSomeday={!this.state.showSomeday}
+            setSubTaskValues={this.setSubTaskValues}
             />
           </div>
-           
          }
+
+        
 
     return (
       <div className="TodoList">

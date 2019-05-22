@@ -1,0 +1,56 @@
+.SubTasks {
+    width: 350px;
+    height: auto;
+    margin-top: -490px;
+    margin-left: 520px;
+    font-size: 25px;
+    font-family: Arial;
+    padding-left: 8px;
+    color: #4f4f4f;
+   
+  }
+  
+  .SubTaskCard {
+    padding: 5px;
+    font-size: 20px;
+    width: 420px;
+    height: 420px;
+    background-color: white;
+    box-shadow: 1px 1px 1px #b8b5b4;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
+    border-radius: 1%;
+    
+  }
+
+  .ItemName {
+    font-size: 20px;
+    margin-left:20px;
+    margin-top:25px;
+   }
+  
+  /* .Task {
+    margin: 10px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  .DisplayTasks
+  {
+  white-space: pre-wrap;
+  z-index: -1;
+  margin-top:2px;
+  font-size: 14px;
+  }
+  
+  .li{
+  cursor: pointer;
+  }
+  
+  .Task:hover {
+  background-color: #e3e4e5;
+  cursor: pointer;
+  } */
+  
+  .SubTaskSpace {
+    margin: 15px;
+  }

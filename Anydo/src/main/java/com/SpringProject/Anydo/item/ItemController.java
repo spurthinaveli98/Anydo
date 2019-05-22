@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins="*")
 @RestController
 public class ItemController {
 
@@ -29,10 +30,11 @@ public class ItemController {
         }
     }
 
-    @PostMapping(value = "/AnydoItem")
-    public void addItem(@RequestBody JsonNode json)throws Exception {
+    @PostMapping(value = "/AnydoSubTask")
+    public AnydoSubTask addSubTask(@RequestBody JsonNode json)throws Exception {
         try{
-            itemService.addItem(json);
+             AnydoSubTask anydoSubTask = subTaskService.addSubTask(json);
+            return anydoSubTask;
         }
         catch (NullPointerException e) {
             throw new NullPointerException("Incomplete Information");
