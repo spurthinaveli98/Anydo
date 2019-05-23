@@ -1,35 +1,28 @@
-.SubTaskCard {
-    position: absolute;
-    font-size: 10px;
-    width: 20px;
-    height: 20px;
-    padding: 5px;
-    background-color: white;
-    /* box-shadow: 1px 1px 1px #b8b5b4;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17); */
-    border-radius: 4px;
-  }
 
-  .SubTask {
-    position: relative;
-    margin: 5px;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-/* 
-  li {
-    color: #333;
-    background-color: rgba(255, 255, 255, .5);
-    padding: 5px;
-    font-family: Arial;
-    border-radius: 5px;
-    list-style: none;
-    cursor: pointer;
-  }
+
+ .theSubTaskList {
+      list-style-type: none;
+       width:340px;
+        padding:2px; 
+        margin : 1px; 
+    } 
+
+ .theSubTaskName {
+      display : block;
+       padding:14px; 
+       margin:14px; 
+       border : 1px solid #ebebe0; 
+       border-radius: 5px; 
+       font-size: 15px;
+       box-shadow: 0.5px 0.5px 0.5px #b8b5b4;
+       box-shadow: 0 0.2px 0.4px 0 rgba(0,0,0,0.2), 0 0.2px 0.8px 0 rgba(0,0,0,0.17);
+    }
+
+    .theSubTaskName:hover{
+
+        border : 1px solid #42b7dd; 
+        transform: translate(2px, 2px);
+    }
   
-  ul.theSubTask {
-    padding: 0;
-    font-family: Arial;
-  } */
+
  

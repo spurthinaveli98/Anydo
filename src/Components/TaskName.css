@@ -25,4 +25,5 @@
   .TaskNameCard:hover {
     background-color: #e7ecf1;
     cursor: pointer;
+    transform: translate(2px, 2px);
     }

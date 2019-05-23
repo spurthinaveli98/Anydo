@@ -20,6 +20,10 @@ public class AnydoItem {
     @Column
     private long listId;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "itemId", referencedColumnName = "itemId")
+    private List<AnydoSubTask> anydoSubTask;
+
     public long getItemId() {
         return itemId;
     }

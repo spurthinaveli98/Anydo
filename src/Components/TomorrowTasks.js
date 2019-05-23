@@ -10,17 +10,17 @@ class TomorrowTasks extends Component {
 
     displayTasks(item) {
         console.log(item);
-        return <li onClick={() => this.setSubTaskValues(item)} className="li" key={item}>{item}</li>
+        return <div onClick={() => this.setSubTaskValues(item, "Tomorrow")} className="TodayTaskName" key={item}>{item}</div>
       }
 
-      setSubTaskValues(item){
-        this.props.setSubTaskValues(item);
+      setSubTaskValues(item,day){
+        this.props.setSubTaskValues(item,day);
      }
 
   render() {
      let showHideClassName;
     if (this.props.show) {
-      showHideClassName = "thelist";
+      showHideClassName = "TodayTaskList";
     } else {
       showHideClassName = "";
 
@@ -28,9 +28,9 @@ class TomorrowTasks extends Component {
       var taskItems = taskEntries.map(this.displayTasks);
     }
     return (
-      <ui className={showHideClassName} >
+      <div className={showHideClassName} >
        {taskItems}
-      </ui>
+      </div>
     );
   }
 }

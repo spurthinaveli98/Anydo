@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @CrossOrigin(origins="*")
 @RestController
 public class ItemController {
@@ -30,11 +33,19 @@ public class ItemController {
         }
     }
 
-    @PostMapping(value = "/AnydoSubTask")
-    public AnydoSubTask addSubTask(@RequestBody JsonNode json)throws Exception {
+    @GetMapping(value = "/AnydoItem")
+    public List<AnydoItem> getAllItems() throws Exception{
+        List<AnydoItem> allInfo = itemService.getAllItems();
+        if(allInfo.isEmpty())
+            throw new NullPointerException("Items are Empty");
+        return allInfo;
+    }
+
+    @PostMapping(value = "/AnydoItem")
+    public AnydoItem addItem(@RequestBody JsonNode json)throws Exception {
         try{
-             AnydoSubTask anydoSubTask = subTaskService.addSubTask(json);
-            return anydoSubTask;
+           AnydoItem anydoItem = itemService.addItem(json);
+           return anydoItem;
         }
         catch (NullPointerException e) {
             throw new NullPointerException("Incomplete Information");

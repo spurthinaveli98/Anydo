@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
 
@@ -14,6 +16,11 @@ public class ItemService {
 
     public AnydoItem getItem(Long id){
         return itemRepository.getItem(id);
+    }
+
+    public List<AnydoItem> getAllItems() {
+
+        return itemRepository.findAll();
     }
 
 

@@ -83,18 +83,6 @@ class SubTasks extends Component {
         "subTaskName":subTask,
         "itemId":itemId
       };
-
-     var newSubTask = {
-       name: subTask,
-       key: Date.now(),
-       itemId: itemId
-     };
-
-     this.setState((prevState) => {
-       return {
-         tasks: prevState.tasks.concat(newSubTask)
-       };
-     });
    }
 
   console.log(this.state.tasks);
@@ -102,23 +90,48 @@ class SubTasks extends Component {
  console.log(dataToSend);
  const URL = `http://localhost:8080/AnydoSubTask`;
  
- return axios(URL, {
+    axios(URL, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
     },
     data: dataToSend,
   })
-    .then(response => response.data)
-    .catch(error => {
-      throw error;
-    }); 
+  .then(subTaskResponse => {
+    console.log(subTaskResponse);
+    console.log(subTaskResponse.data.itemId);
+    var newSubTask = {
+      name: subTaskResponse.data.subTaskName,
+      itemId: subTaskResponse.data.itemId,
+      key: subTaskResponse.data.subTaskId
+    };
+console.log(newSubTask);
+    this.setState((prevState) => {
+      return {
+        tasks: prevState.tasks.concat(newSubTask)
+      };
+    });
+    console.log(this.state.tasks);
+   })
+
+   .catch(error => {
+     throw error;
+   }); 
 }
 
   render() {
     let subTaskTable = null;
     if(this.state.show){
+      
+      let item = this.state.item;
+      for(let i=0;i<item.length;i++){
+        if(item[i].itemName == this.props.itemName){
+            itemId = item[i].itemId;
+        }
+      }
       console.log(this.state.tasks);
+      console.log(itemId);
+      console.log(this.props.itemName);
       console.log(itemId);
       subTaskTable =(
         <div>

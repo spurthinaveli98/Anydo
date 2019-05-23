@@ -36,7 +36,7 @@ class DisplaySubTask extends Component {
             if(entry.itemId == id){
             return (
             <div>
-                <p>{entry.name}</p>
+                <p className= "theSubTaskName">{entry.name}</p>
             </div>
             );
             }
@@ -44,7 +44,7 @@ class DisplaySubTask extends Component {
         
        
         return (
-              <div className = "theSubTask">
+              <div className = "theSubTaskList">
                     {/* {ListOfSubTasks} */}
                     {commentNodes}
               </div>       

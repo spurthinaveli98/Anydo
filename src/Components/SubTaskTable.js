@@ -15,6 +15,10 @@ class SubTaskTable extends Component {
       }
   }
 
+//   componentWillReceiveProps(nextProps){
+//     this.setState({tasks : });
+//   }
+
   addSubTask = (value) => {
     this.props.addSubTask(value);
  }

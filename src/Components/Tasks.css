@@ -41,8 +41,10 @@ cursor: pointer;
 }
 
 .Task:hover {
-background-color: #e3e4e5;
+/* background-color: #e3e4e5; */
+color:#3c80ce;
 cursor: pointer;
+transform: translate(2px, 2px);
 }
 
 .Space {

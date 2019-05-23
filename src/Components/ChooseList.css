@@ -70,6 +70,7 @@
     background-color:#e8e9ea;
     cursor: pointer;
     color:red;
+    transform: translate(2px, 2px);
   }
 
   .Task2:active {

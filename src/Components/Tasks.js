@@ -13,11 +13,12 @@ class Tasks extends Component {
      Todaytasks:[],
      Tomorrowtasks:[],
      Somedaytasks:[],
-     showSubTasks: false,
+     showSubTasks: this.props.showSubTasks,
      showTodayTasks:this.props.showToday,
      showTomorrowTasks:this.props.showTomorrow,
      showSomedayTasks:this.props.showSomeday,
      taskName:"",
+     day: "Today",
     };
   }
  
@@ -41,6 +42,7 @@ class Tasks extends Component {
     }
     this.setState({Todaytasks:task});
   }
+  this.setState({day:"Today"});
   console.log(this.state.showSubTasks);
   }
 
@@ -64,6 +66,7 @@ class Tasks extends Component {
     }
     this.setState({Tomorrowtasks:task});
   }
+  this.setState({day:"Tomorrow"});
   }
 
   displaySomeday(name){
@@ -86,11 +89,14 @@ class Tasks extends Component {
     }
     this.setState({Somedaytasks:task});
   }
+  this.setState({day:"Someday"});
   }
 
-  setSubTaskValues=(item)=>{
+  setSubTaskValues=(item, day)=>{
     this.setState({taskName:item});
     this.setState({showSubTasks:true});
+    this.setState({day:day});
+    
   }
 
   render() {
@@ -98,35 +104,46 @@ class Tasks extends Component {
     let content = null;
 
     if(this.state.showSubTasks){
-       content = (
-      <div>
-         <SubTasks itemName={this.state.taskName} listName={this.props.listName}/>
-      </div>);
-       
-     }
+      let items=[];
+    let tasks = [];
+    items = this.props.items;
+    for(let i=0;i<items.length;i++){
+      if(items[i].key === this.props.currentKey){
+       tasks =items[i].DeadLines[this.state.day];
+      }
+    }
+    for(let j=0;j<tasks.length;j++){
+      if(tasks[j] == this.state.taskName){
+      content = (
+        <div>
+           <SubTasks itemName={this.state.taskName} listName={this.props.listName} listId={this.props.currentKey}/>
+        </div>);
+      }
+    }     
+ }
    
     return (
       <div>
       <div className="Tasks">
       <div className="Space">           
-      <strong>{this.props.listName}</strong>
+      <h3>{this.props.listName}</h3>
       </div>
 
           <div className="Card">
             <div className="Task" onClick={this.displayToday.bind(this,"Today")}>
-            Today
+            <strong>Today</strong>
             </div>
 
             <TodayTasks tasks={this.state.Todaytasks} show={this.state.showTodayTasks} setSubTaskValues={this.setSubTaskValues}/>
             
             <div className="Task" onClick={this.displayTomorrow.bind(this,"Tomorrow")}>
-            Tomorrow
+            <strong>Tomorrow</strong>
             </div>
 
             <TomorrowTasks tasks={this.state.Tomorrowtasks} show={this.state.showTomorrowTasks} setSubTaskValues={this.setSubTaskValues}/>
 
             <div className="Task" onClick={this.displaySomeday.bind(this,"Someday")}>
-            Someday
+            <strong>Someday</strong>
             </div>
           
             <SomedayTasks tasks={this.state.Somedaytasks} show={this.state.showSomedayTasks} setSubTaskValues={this.setSubTaskValues}/>

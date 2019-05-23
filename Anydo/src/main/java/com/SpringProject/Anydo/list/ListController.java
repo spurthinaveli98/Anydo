@@ -28,9 +28,10 @@ public class ListController {
     }
 
     @PostMapping(value = "/AnydoList")
-    public void addList(@RequestBody JsonNode json)throws Exception {
+    public AnydoList addList(@RequestBody JsonNode json)throws Exception {
         try{
-            listService.addList(json);
+           AnydoList anydoList = listService.addList(json);
+           return anydoList;
         }
         catch (NullPointerException e) {
             throw new NullPointerException("Incomplete Information");
