@@ -1,0 +1,43 @@
+
+ .TomorrowDeleteTaskList {
+    list-style-type: none;
+    font-family: Arial;
+     width:340px;
+      padding:5px; 
+      margin : 5px; 
+  } 
+  
+  .TomorrowDeleteTaskName {
+    display : block;
+     padding:15px; 
+     margin:15px; 
+     border : 1px solid #ebebe0; 
+     border-radius: 5px; 
+     font-size: 16px;
+     cursor: pointer;
+     box-shadow: 0.5px 0.5px 0.5px #b8b5b4;
+     box-shadow: 0 0.2px 0.4px 0 rgba(0,0,0,0.2), 0 0.2px 0.8px 0 rgba(0,0,0,0.17);
+  }
+  
+  .TomorrowDeleteTaskName:hover{
+    border : 1px solid #42b7dd; 
+    transform: translate(2px, 2px);
+  }
+  
+  .deleteTomorrowp {
+    display: inline;
+    align-items: left;
+    padding-left: 60px;
+  }
+  
+  .deleteTomorrow {
+    display:inline;
+    color: gray;
+    padding-right:180px;
+    align-content: right;
+  }
+
+  .delSubTaskTomorrow {
+      padding-right:80px;
+  }
+  

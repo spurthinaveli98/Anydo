@@ -23,7 +23,8 @@ class TomorrowTasks extends Component {
       showHideClassName = "TodayTaskList";
     } else {
       showHideClassName = "";
-
+      
+      console.log(this.props.tasks);
       var taskEntries = this.props.tasks;
       var taskItems = taskEntries.map(this.displayTasks);
     }

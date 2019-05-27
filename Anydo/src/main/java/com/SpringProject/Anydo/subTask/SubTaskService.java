@@ -30,5 +30,19 @@ public class SubTaskService {
 
         return subTaskRepository.save(anydoSubTask);
     }
+
+    public List<AnydoSubTask> deleteSubTask(String name) {
+        subTaskRepository.delete(subTaskRepository.deleteOne(name));
+        return subTaskRepository.findAll();
+    }
+
+    public AnydoSubTask updateSubTask(JsonNode json, String name) {
+        AnydoSubTask anydoSubTask = subTaskRepository.getOne(name);
+
+        String subTaskName = json.get("subTaskName").asText();
+        anydoSubTask.setSubTaskName(subTaskName);
+
+        return subTaskRepository.save(anydoSubTask);
+    }
 }
 

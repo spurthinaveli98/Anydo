@@ -31,6 +31,15 @@ class SubTaskTable extends Component {
  }
 }
 
+deleteSubTask = (name) => {
+ this.props.delete(name);
+  console.log("subTask Table");
+}
+
+handleSubTaskNameChange = (name,oldName) => {
+  this.props.handleSubTaskNameChange(name,oldName);
+}
+
   render() {
 
     let ListOfSubTasks = null;
@@ -40,7 +49,7 @@ class SubTaskTable extends Component {
     
       ListOfSubTasks = 
       <div>
-       <DisplaySubTask subTaskEntries={this.props.subTaskEntries} itemId = {this.props.itemId}/>
+       <DisplaySubTask subTaskEntries={this.props.subTaskEntries} itemId = {this.props.itemId} delete = {this.deleteSubTask} handleSubTaskNameChange = {this.handleSubTaskNameChange}/>
      </div>
     
    

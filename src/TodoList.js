@@ -1,6 +1,8 @@
+
 import React, { Component } from 'react';
 import './TodoList.css';
 import DisplayList from './Components/DisplayList';
+import DeleteList from './Components/DeleteList';
 import DenseAppBar from './Components/DenseAppBar';
 import Tasks from './Components/Tasks';
 import ChooseList from './Components/ChooseList';
@@ -25,8 +27,11 @@ this.state = {
   showToday:true,
   showTomorrow:true,
   showSomeday:true,
+  showDeleteList:false,
   daySelectedStatus: "",
   listSelectedStatus: "",
+  updateListId: "",
+  newItems:[],
  items:[]
 };
 
@@ -132,16 +137,15 @@ var data;
     
 }
 
-displayItem(list,key){
+displayItem = (list,key) => {
 
   tasks=list;
   currentKey=key;
-  this.setState({show: true });
-  this.setState({showSubTasks : false});
-  this.setState({showToday : false});
-  this.setState({showTomorrow:false});
-  this.setState({showSomeday:false});
-  
+  this.setState({show: true,
+    showSubTasks : false,
+    showToday : false,
+    showTomorrow:false,
+    showSomeday:false});
 }
 
 toggleMenuHandler = () => {
@@ -202,6 +206,7 @@ AddTaskHandler = () => {
 
     myList = () => {
     tasks="All Tasks";
+    currentKey = "";
     this.setState({show: true });
     console.log("All tasks");
     };
@@ -215,17 +220,232 @@ AddTaskHandler = () => {
       this.setState({daySelectedStatus: p});
      }
 
+     deleteList = () => {
+        this.setState({showDeleteList:!this.state.showDeleteList});
+     }
+
+     delete = (key) => {
+      const URL = "http://localhost:8080/AnydoList/"+key;
+        axios(URL, {
+        method: 'DELETE'
+      })
+        .then(response => { 
+          console.log(response.data);
+
+          // this.setState({items:""});
+          console.log(this.state.items);
+          let temp=[];
+          let newResult=[];
+          let item = this.state.item;
+          newResult = response.data;
+          for(let i=0;i<newResult.length;i++){
+            var DeadLines = { Today: [], Tomorrow: [], Someday: []};
+            var newItem = {
+                list: newResult[i].listName,
+                DeadLines: DeadLines,
+                key: newResult[i].listId
+              };
+              for(let j=0;j<item.length;j++){
+                if(newResult[i].listId === item[j].listId){
+                    newItem.DeadLines[item[j].dayName].push(item[j].itemName);
+                }
+              }
+              console.log(newItem); 
+            this.setState((prevState) => {
+              return {
+                newItems: prevState.newItems.concat(newItem)
+              };
+            });
+          }
+          this.setState({items:this.state.newItems});
+          this.setState({newItems:temp});
+          this.setState({showDeleteList:!this.state.showDeleteList});
+          
+        })
+        .catch(error => {
+          throw error;
+        });
+
+        
+        
+      this.setState({showSubTasks : false});
+      this.setState({showToday : false});
+      this.setState({showTomorrow:false});
+      this.setState({showSomeday:false});
+      // this.setState({showDeleteList:!this.state.showDeleteList});
+     }
+
+     callAfterDeleteTask = (newResult) => {
+       this.setState({show:!this.state.show});
+       console.log("call after delete task");
+      let temp=[];
+       console.log(this.state.item);
+       console.log(this.state.result);
+       console.log(this.state.items);
+       console.log(newResult);
+       this.setState({item:newResult});
+       let result = this.state.result;
+       let item = this.state.item;
+       for(let i=0;i<result.length;i++){
+         var DeadLines = { Today: [], Tomorrow: [], Someday: []};
+         var newItem = {
+             list: result[i].listName,
+             DeadLines: DeadLines,
+             key: result[i].listId
+           };
+           for(let j=0;j<item.length;j++){
+             if(result[i].listId === item[j].listId){
+                 newItem.DeadLines[item[j].dayName].push(item[j].itemName);
+             }
+            }
+         this.setState((prevState) => {
+           return {
+             newItems: prevState.newItems.concat(newItem)
+           };
+         });
+       }
+         this.setState({items:this.state.newItems});
+        this.setState({newItems:temp});
+       console.log(this.state.items);
+       this.setState({show:!this.state.show});
+     }
+
+     handleListNameChange = (e) => {
+    
+      const data = {
+        "listName":e
+        }
+
+        console.log("entered"+e);
+        this.setState({showUpdateTable: false});
+                            // this.setState({show :!this.state.show});
+                          let item = this.state.items;
+                            for(let i=0;i<item.length;i++){
+                              if(item[i].key == currentKey){
+                                item[i].list = e;
+                              }
+                            }
+                            // this.setState({show:!this.state.show});
+
+       let dataToSend = JSON.stringify(data);
+       console.log(currentKey);
+       const URL = "http://localhost:8080/AnydoList/"+currentKey;
+       axios(URL, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        data: dataToSend,
+      })
+        .then(response =>response.data)
+        .catch(error => {
+          throw error;
+        }); 
+  
+     }
+
+     handleItemNameChange = (updatedName,oldName) => {
+       console.log("entered");
+    
+      const data = {
+        "itemName":updatedName
+        }
+
+    //     console.log("entered"+e);
+                            this.setState({show :!this.state.show});
+
+
+       let dataToSend = JSON.stringify(data);
+       const URL = "http://localhost:8080/AnydoItem/"+oldName;
+       axios(URL, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        data: dataToSend,
+      })
+        .then(response =>{
+          console.log(response.data);
+          let item = this.state.item;
+          for(let j=0;j<item.length;j++){
+            if(item[j].itemId === response.data.itemId){
+              item[j].itemName = response.data.itemName;
+            }
+          }
+          let temp = [];
+          this.setState({items:temp});
+          let result = this.state.result;
+          for(let i=0;i<result.length;i++){
+            var DeadLines = { Today: [], Tomorrow: [], Someday: []};
+            var newItem = {
+                list: result[i].listName,
+                DeadLines: DeadLines,
+                key: result[i].listId
+              };
+              for(let j=0;j<item.length;j++){
+                if(result[i].listId === item[j].listId){
+                    newItem.DeadLines[item[j].dayName].push(item[j].itemName);
+                }
+              }
+            this.setState((prevState) => {
+              return {
+                items: prevState.items.concat(newItem)
+              };
+            });
+          }
+          
+  // this.setState({showSubTasks:!this.state.showSubTasks});
+          this.setState({show:!this.state.show});
+          console.log(this.state.items);
+        })
+        .catch(error => {
+          throw error;
+        }); 
+  
+     }
+
 
   render() {
 
+
     let menu = null;
     let content = null;
+    let listTable = null;
+
+    if(this.state.showDeleteList){
+      listTable = (
+        <DeleteList entries={this.state.items}
+          delete={this.delete}
+        />
+      );
+    }
+    else{
+      listTable = (
+      <DisplayList entries={this.state.items}
+      display={this.displayItem}/>
+      );
+    }
           menu = (
             <div className="content">
 
-            <h3 className="h3"> <strong className="strong" onClick={this.myList.bind(this)}>MY LISTS </strong>&#x270D;</h3>
-             <DisplayList entries={this.state.items}
-                           display={this.displayItem}/>
+            {/* <h3 className="h3"> <strong className="strong" onClick={this.myList.bind(this)}>MY LISTS </strong>&#x270D;</h3> */}
+            <div className="title">
+      <svg className= "circle" width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10.6" stroke-width="1.2" stroke="currentColor" fill="none"></circle>
+        <g fill="currentColor" fill-rule="evenodd">
+        <path d="M9.629 15.437L7.147 12.56a.661.661 0 0 0-.914-.076.617.617 0 0 0-.081.888l2.923 3.386c.116.134.277.21.444.223a.654.654 0 0 0 .648-.206l6.683-7.741a.617.617 0 0 0-.083-.886.658.658 0 0 0-.912.075L9.63 15.437z"></path>
+        </g>
+      </svg>
+    <h3 className="h3" onClick={this.myList.bind(this)}>MY LISTS</h3> 
+    <svg onClick={this.deleteList.bind(this)} className="pen" width="24" height="24" viewBox="0 0 24 24">
+    <g stroke="none" stroke-width="1"  transform="translate(-239.000000, -202.000000)">
+    <g transform="translate(239.000000, 202.000000)">
+    <path d="M8.32434121,13.517767 L19.8517292,13.517767 L19.8517292,10.517767 L8.46647684,10.517767 L5.39540903,12.0533009 L8.32434121,13.517767 Z M20.8517292,14.517767 L8.15934105,14.517767 L8.15934105,14.5533009 L3.15934105,12.0533009 L8.15934105,9.55330086 L8.15934105,9.51776695 L20.8517292,9.51776695 L20.8517292,14.517767 Z" fill="gray" transform="translate(12.005535, 12.035534) rotate(-41.000000) translate(-12.005535, -12.035534)"></path>
+    </g>
+    </g>
+    </svg> 
+      </div>
+             {listTable}
                 <form onSubmit={this.addItem}>
                   <input style={this.style} ref={(a) => this._inputElement =a}
                   placeholder="+ New List">
@@ -233,7 +453,9 @@ AddTaskHandler = () => {
                 </form>
              </div>);
 
-         if(this.state.show){
+    
+            
+          if(this.state.show){
            content = 
            <div>
             <Tasks 
@@ -245,6 +467,9 @@ AddTaskHandler = () => {
             showTomorrow={this.state.showTomorrow}
             showSomeday={this.state.showSomeday}
             setSubTaskValues={this.setSubTaskValues}
+            valuesAfterDeletionOfTask = {this.callAfterDeleteTask}
+            handleListNameChange = {this.handleListNameChange}
+            handleItemNameChange = {this.handleItemNameChange}
             />
           </div>
          }
@@ -278,4 +503,3 @@ AddTaskHandler = () => {
 }
 
 export default TodoList;
-

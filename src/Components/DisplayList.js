@@ -10,9 +10,10 @@ constructor(props){
 }
 
   createTasks(item) {
-    return <div className="li" onClick={() => this.display(item.list,item.key)}
-    key={item.key}>{item.list}</div>
+    return <div className="li1" onClick={() => this.display(item.list,item.key)}
+    key={item.key}><p className="p">{item.list}</p></div>
   }
+
 
   display(list,key) {
     this.props.display(list,key);
@@ -23,9 +24,10 @@ constructor(props){
     var listItems = todoEntries.map(this.createTasks);
 
      return (
-      <div className = "ul">
+      <div className = "ul1">
       {listItems}
       </div>
+
     );
   }
 }

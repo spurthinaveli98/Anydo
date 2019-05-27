@@ -13,5 +13,11 @@ public interface SubTaskRepository extends JpaRepository<AnydoSubTask, Long> {
 
     public List<AnydoSubTask> findAll();
 
+    @Query("SELECT i FROM  AnydoSubTask i WHERE i.subTaskName = :name")
+    AnydoSubTask deleteOne(@Param("name") String name);
+
+
+    @Query("SELECT i FROM  AnydoSubTask i WHERE i.subTaskName = :name")
+    AnydoSubTask getOne(@Param("name") String name);
 }
 

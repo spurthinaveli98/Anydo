@@ -39,5 +39,19 @@ public class ItemService {
 
         return itemRepository.save(anydoItem);
     }
+
+    public List<AnydoItem> deleteItem(String name) {
+        itemRepository.delete(itemRepository.deleteOne(name));
+        return itemRepository.findAll();
+    }
+
+    public AnydoItem updateItem(JsonNode json, String name) {
+        AnydoItem anydoItem = itemRepository.getOne(name);
+
+        String itemName = json.get("itemName").asText();
+        anydoItem.setItemName(itemName);
+
+        return itemRepository.save(anydoItem);
+    }
 }
 

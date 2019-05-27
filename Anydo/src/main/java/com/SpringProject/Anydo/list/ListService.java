@@ -26,4 +26,19 @@ AnydoList anydoList = new AnydoList();
 
         return listRepository.save(anydoList);
     }
+
+    public List<AnydoList> deleteList(Long id) {
+        listRepository.delete(listRepository.getOne(id));
+        return listRepository.findAll();
+    }
+
+
+    public AnydoList updateList(JsonNode json, Long id) {
+        AnydoList anydoList = listRepository.getOne(id);
+
+        String listName = json.get("listName").asText();
+        anydoList.setListName(listName);
+
+        return listRepository.save(anydoList);
+    }
 }

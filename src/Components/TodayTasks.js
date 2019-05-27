@@ -10,7 +10,7 @@ class TodayTasks extends Component {
 
     displayTasks(item) {
         console.log(item);
-        return <div onClick={() => this.setSubTaskValues(item,"Today")} className="TodayTaskName" key={item}>{item}</div>
+        return <div onClick={() => this.setSubTaskValues(item,"Today")} className="TodayTaskName" key={item}><p className="Todayp">{item}</p>  </div>
     }
 
     setSubTaskValues(item,day){

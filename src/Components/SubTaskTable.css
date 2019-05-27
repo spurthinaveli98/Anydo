@@ -1,6 +1,6 @@
 .SubTaskTable{
     width:370px;
-    height: 220px;
+    height: 200px;
     position: absolute;
     margin-top: 120px;
     margin-left: 20px;
@@ -14,7 +14,7 @@
     padding: 5px;
     font-size: 12px;
     width: 370px;
-    height: 220px;
+    height: 200px;
     background-color: white;
     box-shadow: 0.1px 0.1px 0.1px #b8b5b4;
     box-shadow: 0 0.5px 2px 0 rgba(0,0,0,0.2), 0 0.5px 2px 0 rgba(0,0,0,0.17);
@@ -22,3 +22,21 @@
     align-content: center;
     overflow-y: scroll;
   }
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 22px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px #e4e3e2;
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #e4e3e2; 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    

@@ -16,5 +16,17 @@ public interface ItemRepository extends JpaRepository<AnydoItem, Long> {
     @Query("SELECT i FROM  AnydoItem i WHERE i.itemId = :id")
      AnydoItem getItem(@Param("id") Long id);
 
+    @Query("SELECT i FROM  AnydoItem i WHERE i.itemName = :name")
+     AnydoItem deleteOne(@Param("name") String name);
+//
+//    @Query("UPDATE AnydoItem i SET i.itemName = :name WHERE i.itemName = :name")
+//    AnydoItem deleteOne(@Param("name") String name);
+
+    @Query("SELECT i FROM  AnydoItem i WHERE i.itemName = :name")
+    AnydoItem getOne(@Param("name") String name);
+
 }
 
+//    UPDATE tutorials_tbl
+//   -> SET tutorial_title = 'Learning JAVA'
+//           -> WHERE tutorial_id = 3;

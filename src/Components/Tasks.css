@@ -50,3 +50,47 @@ transform: translate(2px, 2px);
 .Space {
   margin: 15px;
 }
+
+.inline{
+  display: inline;
+}
+
+.tasksPen{
+  display: inline;
+  margin-left:225px;
+}
+
+.tasksPen:hover{
+  transform: translate(4px, 4px);
+  background-color: lightgrey;
+  border-radius: 50%;
+}
+
+.tasksTodayPen{
+  display: inline;
+  margin-left:262px;
+}
+
+.tasksTodayPen:hover{
+  transform: translate(4px, 4px);
+  background-color: lightgrey;
+  border-radius: 50%;
+}
+
+.tasksSomedayPen{
+  display: inline;
+  margin-left:236px;
+}
+
+.tasksSomedayPen:hover{
+  transform: translate(4px, 4px);
+  background-color: lightgrey;
+  border-radius: 50%;
+}
+
+
+.editableList {
+  font-size: 25px;
+  font-family: Arial;
+  border: "2px solid white";
+}
