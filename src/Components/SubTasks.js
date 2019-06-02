@@ -19,7 +19,8 @@ class SubTasks extends Component {
       tasks:[],
       newSubTask:[],
       tempNewSubTask:[],
-      show:false
+      show:false,
+      listname: this.props.listName
     };
   }
 
@@ -171,7 +172,6 @@ handleSubTaskNameChange = (name,oldName) => {
   const data = {
     "subTaskName":name
     }
-    // this.setState({show :!this.state.show});
     let dataToSend = JSON.stringify(data);
     const URL = "http://localhost:8080/AnydoSubTask/"+oldName;
     axios(URL, {
@@ -182,7 +182,6 @@ handleSubTaskNameChange = (name,oldName) => {
      data: dataToSend,
    })
    .then(response =>{
-    //  this.setState({show:!this.state.show});
     let item = this.state.subTasks;
     for(let j=0;j<item.length;j++){
       if(item[j].subTaskId === response.data.subTaskId){
@@ -209,11 +208,11 @@ handleSubTaskNameChange = (name,oldName) => {
     throw error;
   }); 
   console.log(this.state.tasks);
-  // this.setState({show :!this.state.show});
 }
 
   render() {
     let subTaskTable = null;
+    let taskNameInSubTask = null;
     if(this.state.show){
       
       let item = this.state.item;
@@ -233,6 +232,26 @@ handleSubTaskNameChange = (name,oldName) => {
       );
     }
 
+    if(this.props.listName === "All Tasks")
+    {
+      let target = "";
+      let item = this.state.item;
+      let result = this.state.result;
+      for(let i=0; i< item.length; i++){
+        if(item[i].itemName === this.props.itemName){
+             target = item[i].listId;
+        }
+      }
+      for(let i=0; i<result.length; i++){
+        if(target === result[i].listId){
+          taskNameInSubTask =(<TaskName listName={result[i].listName}/>)
+        }
+      }
+    }
+    else {
+      taskNameInSubTask =(
+      <TaskName listName={this.props.listName}/>)
+    }
    
     return (
       <div className="SubTasks">
@@ -243,7 +262,7 @@ handleSubTaskNameChange = (name,oldName) => {
         onKeyDown={event=>this.handleItemNameChange(event)}>{this.props.itemName} </p></strong></div>
           <AddReminder/>
           <ShareTask/>
-          <TaskName listName={this.props.listName}/>
+          {taskNameInSubTask}
           {subTaskTable}
          </div>       
       </div>

@@ -2,15 +2,15 @@
  .SomedayDeleteTaskList {
     list-style-type: none;
     font-family: Arial;
-     width:340px;
+     width:380px;
       padding:5px; 
       margin : 5px; 
   } 
   
   .SomedayDeleteTaskName {
     display : block;
-     padding:15px; 
-     margin:15px; 
+     padding:10px; 
+     margin:10px; 
      border : 1px solid #ebebe0; 
      border-radius: 5px; 
      font-size: 16px;
@@ -33,7 +33,7 @@
   .deleteSomeday {
     display:inline;
     color: gray;
-    padding-right:180px;
+    padding-right:140px;
     align-content: right;
   }
 

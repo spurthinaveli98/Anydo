@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import './TodoList.css';
 import DisplayList from './Components/DisplayList';
@@ -23,10 +22,10 @@ this.state = {
   showpic: true,
   showMenu: true,
   showNewList: false,
-  showSubTasks: true,
-  showToday:true,
-  showTomorrow:true,
-  showSomeday:true,
+  showSubTasks: false,
+  showToday:false,
+  showTomorrow:false,
+  showSomeday:false,
   showDeleteList:false,
   daySelectedStatus: "",
   listSelectedStatus: "",
@@ -88,7 +87,7 @@ var data;
          "listName":this._inputElement.value
        };
 
-      // var newItem = {
+      // var newItem = {  
       //   list: this._inputElement.value,
       //   DeadLines: DeadLines,
       //   key: Date.now()
@@ -138,14 +137,16 @@ var data;
 }
 
 displayItem = (list,key) => {
-
+console.log("clicked List");
   tasks=list;
   currentKey=key;
-  this.setState({show: true,
+  this.setState({
+    show: true,
     showSubTasks : false,
     showToday : false,
-    showTomorrow:false,
-    showSomeday:false});
+    showTomorrow : false,
+    showSomeday : false
+  });  
 }
 
 toggleMenuHandler = () => {
@@ -345,14 +346,12 @@ AddTaskHandler = () => {
      }
 
      handleItemNameChange = (updatedName,oldName) => {
-       console.log("entered");
     
       const data = {
         "itemName":updatedName
         }
 
-    //     console.log("entered"+e);
-                            this.setState({show :!this.state.show});
+        this.setState({show :!this.state.show});
 
 
        let dataToSend = JSON.stringify(data);
@@ -394,7 +393,6 @@ AddTaskHandler = () => {
             });
           }
           
-  // this.setState({showSubTasks:!this.state.showSubTasks});
           this.setState({show:!this.state.show});
           console.log(this.state.items);
         })
@@ -495,6 +493,7 @@ AddTaskHandler = () => {
           <ChooseList entries={this.state.items} param1={this.param1} status={this.state.listSelectedStatus}/>
         </NewTask>
         {content} 
+        <button onClick = {this.props.auth.logout}>Logout</button>
          </div>
         </div>
       </div>

@@ -63,16 +63,16 @@
     padding: 5px;
     cursor: pointer;
     border-radius: 4px;
-    background-color: rgb(102, 192, 214);
+    background-color: rgb(169, 225, 236);
   }
   
   .Task2:hover {
     background-color:#e8e9ea;
     cursor: pointer;
-    color:red;
+    /* color:red; */
     transform: translate(2px, 2px);
   }
 
-  .Task2:active {
+  /* .Task2:active {
     color: red;
-  }
+  } */

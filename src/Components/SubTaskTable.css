@@ -26,11 +26,11 @@
 /* Scrollbar styles */
 ::-webkit-scrollbar {
     width: 8px;
-    height: 22px;
+    height: 5px;
     }
     
     ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px #e4e3e2;
+    box-shadow: inset 0 0 10px #eeeded;
     border-radius: 10px;
     }
     

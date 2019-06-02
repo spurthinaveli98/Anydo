@@ -17,23 +17,19 @@ class TomorrowTasks extends Component {
         this.props.setSubTaskValues(item,day);
      }
 
-  render() {
-     let showHideClassName;
-    if (this.props.show) {
-      showHideClassName = "TodayTaskList";
-    } else {
-      showHideClassName = "";
-      
-      console.log(this.props.tasks);
-      var taskEntries = this.props.tasks;
-      var taskItems = taskEntries.map(this.displayTasks);
-    }
-    return (
-      <div className={showHideClassName} >
+     render() {
+      let showHideClassName="";
+     if (this.props.show) {
+       var taskEntries = this.props.tasks;
+       var taskItems = taskEntries.map(this.displayTasks);
+       showHideClassName = <div  className="TodayTaskList" >
        {taskItems}
-      </div>
-    );
-  }
+      </div>;
+     } 
+     return (
+       <div>{showHideClassName}</div>
+     );
+   }
 }
 
 

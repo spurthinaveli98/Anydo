@@ -21,6 +21,7 @@ ul {
   } 
   
   .li {
+    margin-bottom: 5px;
     display : block;
      padding-left:30px;
      padding-top:20px; 
@@ -34,8 +35,10 @@ ul {
   }
   
   .p {
+    
     display: inline;
     align-items: left;
+    text-align: center;
   }
   
   .button{

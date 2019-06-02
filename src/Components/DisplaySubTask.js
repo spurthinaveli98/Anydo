@@ -30,7 +30,6 @@ class DisplaySubTask extends Component {
         event.preventDefault();
         event.target.blur();
         this.props.handleSubTaskNameChange(event.target.innerHTML,oldName);
-        console.log(event.target.innerHTML);
     
     }
     }
@@ -46,7 +45,8 @@ class DisplaySubTask extends Component {
             return (
             <div key={entry.name}>
                <div className= "theSubTaskName">
-                <img id="subTask" onClick={() => this.deleteSubTask(entry.name)} className="delSubTask" src={delSubTask} alt="delete"></img> 
+                {/* <img id="subTask" onClick={() => this.deleteSubTask(entry.name)} className="delSubTask" src={delSubTask} alt="delete"></img>  */}
+                <svg className="delSubTask" onClick={() => this.deleteSubTask(entry.name)} width="20" height="20" viewBox="0 0 20 20"><title>Delete</title><g fill="none" fill-rule="evenodd"><path d="M2 2h16v16H2z"></path><path d="M11.062 10l3.75-3.85c.287-.295.24-.735-.104-.984-.347-.251-.856-.212-1.143.082L10 8.91 6.435 5.25c-.287-.295-.796-.334-1.143-.083-.344.249-.39.69-.104.984L8.938 10l-3.75 3.85c-.287.295-.24.735.104.984.347.251.856.212 1.143-.082L10 11.09l3.565 3.66c.287.295.796.334 1.143.083.344-.249.39-.69.104-.984L11.062 10zM10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" fill="currentColor"></path></g></svg>
                 <p  contentEditable = {true}
                 onKeyDown={event=>this.handleSubTaskNameChange(event,entry.name)}>{entry.name}</p></div>
             </div>

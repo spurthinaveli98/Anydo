@@ -2,7 +2,7 @@
     width: 103.3px;
     height: 50px;
     position: absolute;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 286.6px;
     font-size: 5px;
     font-family: Arial;
@@ -14,7 +14,7 @@
     padding: 5px;
     font-size: 12px;
     width: 103.3px;
-    height: 50px;
+    height: 60px;
     background-color: white;
     box-shadow: 0.5px 0.5px 0.5px #b8b5b4;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
@@ -23,7 +23,17 @@
   }
 
   .TaskNameCard:hover {
-    background-color: #e7ecf1;
+    /* background-color: #e7ecf1; */
     cursor: pointer;
-    transform: translate(2px, 2px);
+    transform: translate(0.5px, 0.5px);
+    }
+
+    .taskName {
+      margin-left:28px;
+      color:rgb(156, 155, 155);
+    }
+
+    .text {
+      margin-left:23px;
+      color:rgb(156, 155, 155);
     }

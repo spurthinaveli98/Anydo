@@ -17,7 +17,7 @@ class Tasks extends Component {
      Todaytasks:[],
      Tomorrowtasks:[],
      Somedaytasks:[],
-     showSubTasks: "",
+     showSubTasks: this.props.showSubTasks,
      showTodayTasks:"",
      showTomorrowTasks:"",
      showSomedayTasks:"",
@@ -28,7 +28,31 @@ class Tasks extends Component {
      day: "Today",
     };
   }
- 
+ componentWillReceiveProps(newProps)
+ {
+   console.log("will receive");
+   console.log(newProps);
+
+   let showSubTasks=[];
+  // showSubTasks=[...newProps.SubTasks]
+   this.setState({
+    //showSubTasks: newProps.showSubTasks,
+    showTodayTasks:newProps.showToday,
+    showTomorrowTasks:newProps.showTomorrow,
+    showSomedayTasks:newProps.showSomeday,
+  })
+ }
+componentDidMount(){
+  console.log("after click");
+  console.log(this.props);
+  this.setState({
+    showSubTasks: this.props.showSubTasks,
+    showTodayTasks:this.props.showToday,
+    showTomorrowTasks:this.props.showTomorrow,
+    showSomedayTasks:this.props.showSomeday,
+  })
+}
+
   displayToday(name){
     var match = "false";
     let items=this.props.items;
@@ -55,6 +79,7 @@ class Tasks extends Component {
   }
   this.setState({day:"Today"});
   this.setState({showTodayTasks:!this.state.showTodayTasks});
+  this.setState({showDeleteTodayTask:false});
   }
 
   displayTomorrow(name){
@@ -83,6 +108,7 @@ class Tasks extends Component {
   }
   this.setState({day:"Tomorrow"});
   this.setState({showTomorrowTasks:!this.state.showTomorrowTasks});
+  this.setState({showDeleteTomorrowTask:false});
   }
 
   displaySomeday(name){
@@ -111,13 +137,13 @@ class Tasks extends Component {
   }
   this.setState({day:"Someday"});
   this.setState({showSomedayTasks:!this.state.showSomedayTasks});
+  this.setState({showDeleteSomedayTask:false});
   }
 
-  setSubTaskValues=(item, day)=>{
+  setSubTaskValues = (item, day) => {
     this.setState({taskName:item});
     this.setState({showSubTasks:true});
-    this.setState({day:day});
-    
+    this.setState({day:day}); 
   }
 
   deleteTodayTask(name){
@@ -134,13 +160,18 @@ class Tasks extends Component {
    if(match == "false"){
     var task = [];
     for(let j=0;j<items.length;j++){
-      if(items[j].DeadLines[name]!="")
-      task.push(items[j].DeadLines[name]);
+      if(items[j].DeadLines[name]!=""){
+      let temp = [];
+      temp = [...items[j].DeadLines[name]];
+      for(let k = 0;k < temp.length; k++){
+        task.push(temp[k]);
+      }
+      }
     }
     this.setState({Todaytasks:task});
   }
   this.setState({day:"Today"});
-  this.setState({showTodayTasks:!this.state.showTodayTasks});
+  this.setState({showTodayTasks:false});
     this.setState({showDeleteTodayTask:!this.state.showDeleteTodayTask
     });
  }
@@ -159,13 +190,18 @@ class Tasks extends Component {
  if(match == "false"){
   var task = [];
   for(let j=0;j<items.length;j++){
-    if(items[j].DeadLines[name]!="")
-    task.push(items[j].DeadLines[name]);
+    if(items[j].DeadLines[name]!=""){
+    let temp = [];
+    temp = [...items[j].DeadLines[name]];
+    for(let k = 0;k < temp.length; k++){
+      task.push(temp[k]);
+    }
+    }
   }
   this.setState({Tomorrowtasks:task});
 }
 this.setState({day:"Tomorrow"});
-this.setState({showTomorrowTasks:!this.state.showTomorrowTasks});
+this.setState({showTomorrowTasks:false});
   this.setState({showDeleteTomorrowTask:!this.state.showDeleteTomorrowTask
   });
 }
@@ -184,15 +220,19 @@ deleteSomedayTask(name){
  if(match == "false"){
   var task = [];
   for(let j=0;j<items.length;j++){
-    if(items[j].DeadLines[name]!="")
-    task.push(items[j].DeadLines[name]);
+    if(items[j].DeadLines[name]!=""){
+    let temp = [];
+    temp = [...items[j].DeadLines[name]];
+    for(let k = 0;k < temp.length; k++){
+      task.push(temp[k]);
+    }
+    }
   }
   this.setState({Somedaytasks:task});
 }
 this.setState({day:"Someday"});
-this.setState({showSomedayTasks:!this.state.showSomedayTasks});
-  this.setState({showDeleteSomedayTask:!this.state.showDeleteSomedayTask
-  });
+this.setState({showSomedayTasks:false});
+this.setState({showDeleteSomedayTask:!this.state.showDeleteSomedayTask});
 }
 
  deleteTask = (item) => {
@@ -205,8 +245,7 @@ this.setState({showSomedayTasks:!this.state.showSomedayTasks});
    let newResult=[];
    newResult = response.data;
    this.props.valuesAfterDeletionOfTask(newResult);
- });
-
+ });  
  }
 
  handleListNameChange = (event) => {
@@ -224,28 +263,19 @@ handleItemNameChange = (name) => {
   console.log("tasks");
   this.props.handleItemNameChange(name, this.state.taskName);
 }
-  
-componentDidMount(){
-  this.setState({
-    showSubTasks: this.props.showSubTasks,
-    showTodayTasks:this.props.showToday,
-    showTomorrowTasks:this.props.showTomorrow,
-    showSomedayTasks:this.props.showSomeday,
-  })
-}
 
-componentWillReceiveProps(newProps){
-  console.log("enteredwill recieve props")
-  console.log(newProps);
-  if(newProps!=this.props){
-    this.setState({
-      showSubTasks: newProps.showSubTasks,
-      showTodayTasks:newProps.showToday,
-      showTomorrowTasks:newProps.showTomorrow,
-      showSomedayTasks:newProps.showSomeday,
-    })
-  }
-}
+// componentWillReceiveProps(newProps){
+//   console.log("enteredwill recieve props")
+//   console.log(newProps);
+//   if(newProps!=this.props){
+//     this.setState({
+//       showSubTasks: newProps.showSubTasks,
+//       showTodayTasks:newProps.showToday,
+//       showTomorrowTasks:newProps.showTomorrow,
+//       showSomedayTasks:newProps.showSomeday,
+//     })
+//   }
+// }
   render() {
     
     console.log(this.state);
@@ -258,7 +288,7 @@ componentWillReceiveProps(newProps){
     if(this.state.showDeleteTodayTask){
       taskTodayTable = (
         <DeleteTodayTasks tasks={this.state.Todaytasks} 
-        show={this.state.showTodayTasks}   delete={this.deleteTask}/>
+        show={this.state.showDeleteTodayTask}   delete={this.deleteTask}/>
       );
     } 
     
@@ -272,7 +302,7 @@ componentWillReceiveProps(newProps){
     if(this.state.showDeleteTomorrowTask){
       taskTomorrowTable = (
         <DeleteTomorrowTasks tasks={this.state.Tomorrowtasks} 
-        show={this.state.showTomorrowTasks}   delete={this.deleteTask}/>
+        show={this.state.showDeleteTomorrowTask}   delete={this.deleteTask}/>
       );
     } 
     else{
@@ -286,7 +316,7 @@ componentWillReceiveProps(newProps){
     if(this.state.showDeleteSomedayTask){
       taskSomedayTable = (
         <DeleteSomedayTasks tasks={this.state.Somedaytasks} 
-        show={this.state.showSomedayTasks}   delete={this.deleteTask}/>
+        show={this.state.showDeleteSomedayTask}   delete={this.deleteTask}/>
       );
     } 
     else{
@@ -306,15 +336,28 @@ componentWillReceiveProps(newProps){
        tasks =items[i].DeadLines[this.state.day];
       }
     }
+      if(this.props.listName == "All Tasks")
+      {
+        // var task = [];
+        for(let j=0;j<items.length;j++){
+          if(items[j].DeadLines[this.state.day]!=""){
+          let temp = [];
+          temp = [...items[j].DeadLines[this.state.day]];
+          for(let k = 0;k < temp.length; k++){
+            tasks.push(temp[k]);
+          }
+          }
+        }
+      }
     for(let j=0;j<tasks.length;j++){
       if(tasks[j] == this.state.taskName){
       content = (
         <div>
-           <SubTasks itemName={this.state.taskName} listName={this.props.listName} 
-           listId={this.props.currentKey} handleItemNameChange = {this.handleItemNameChange}/>
+           <SubTasks handleItemNameChange = {this.handleItemNameChange} itemName={this.state.taskName} listName={this.props.listName} 
+           listId={this.props.currentKey} />
         </div>);
       }
-    }     
+    } 
  }
  
     return (

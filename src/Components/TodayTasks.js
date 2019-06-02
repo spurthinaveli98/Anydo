@@ -18,19 +18,16 @@ class TodayTasks extends Component {
     }
 
   render() {
-     let showHideClassName;
+     let showHideClassName="";
     if (this.props.show) {
-      showHideClassName = "TodayTaskList";
-    } else {
-      showHideClassName = "";
-
       var taskEntries = this.props.tasks;
       var taskItems = taskEntries.map(this.displayTasks);
-    }
+      showHideClassName = <div  className="TodayTaskList" >
+      {taskItems}
+     </div>;
+    } 
     return (
-      <div className={showHideClassName} >
-       {taskItems}
-      </div>
+      <div>{showHideClassName}</div>
     );
   }
 }
