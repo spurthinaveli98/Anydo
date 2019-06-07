@@ -1,0 +1,78 @@
+ /* li {
+    color: #333;
+    background-color: rgba(255, 255, 255, .5);
+    padding: 5px;
+    font-family: Arial;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    list-style: none;
+    cursor: pointer;
+    width:150px;
+    
+  }
+  
+  li:hover {
+    background-color:#e8e9ea ;
+    cursor: pointer;
+  } */
+  /*
+  .liSelected {
+    background-color: blue;
+    color:red;
+    padding: 5px;
+    font-family: Arial;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    list-style: none;
+    cursor: pointer;
+    width:150px;
+  }
+
+   */
+
+  /* ul.theList {
+    padding: 0;
+    font-family: Arial;
+  } */
+  
+
+   .Card2 {
+    position: relative;
+    font-size: 16px;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 1px #b8b5b4;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2), 0 2px 8px 0 rgba(0,0,0,0.17);
+    border-radius: 4px;
+    overflow-y: scroll;
+  }
+
+  .Task2 {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+ 
+  .Task2Press {
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(169, 225, 236);
+  }
+  
+  .Task2:hover {
+    background-color:#e8e9ea;
+    cursor: pointer;
+    /* color:red; */
+    transform: translate(2px, 2px);
+  }
+
+  /* .Task2:active {
+    color: red;
+  } */

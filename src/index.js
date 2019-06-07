@@ -1,23 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./App";
-import * as serviceWorker from './serviceWorker';
-import Auth from "./Auth";
+import './index.css';
+import App from './app/App';
+import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-const auth = new Auth();
+ReactDOM.render(
+    <Router>
+        <App />
+    </Router>, 
+    document.getElementById('root')
+);
 
-let state = {};
-window.setState = (changes) => {
-state = Object.assign({}, state, changes);
-
-ReactDOM.render(<App {...state}/>, document.getElementById('root'));
-};
-
-/* eslint no-restricted-globals:*/
-let initialState ={
-    location : location.pathname.replace(/^\/?|\/$/g, ""),
-    auth : auth  
-};
-window.setState(initialState);
-// ReactDOM.render(<TodoList />, document.getElementById('root'));
-serviceWorker.unregister();
+registerServiceWorker();

@@ -1,0 +1,46 @@
+
+
+ .theSubTaskList {
+      list-style-type: none;
+       width:345px;
+        padding:2px; 
+        margin : 1px; 
+        font-family: Arial;
+    } 
+
+ .theSubTaskName {
+      display : flex;
+       padding-left :10px; 
+       margin:10px; 
+       border : 1px solid #ebebe0; 
+       border-radius: 5px; 
+       font-size: 15px;
+       box-shadow: 0.5px 0.5px 0.5px #b8b5b4;
+       box-shadow: 0 0.2px 0.4px 0 rgba(0,0,0,0.2), 0 0.2px 0.8px 0 rgba(0,0,0,0.17);
+    }
+
+    .theSubTaskName:hover{
+
+        border : 1px solid #42b7dd; 
+        transform: translate(2px, 2px);
+    }
+  
+    /* .delSubTask {
+   
+       width:10p;
+       height:14px;
+       padding-left:10px;
+       padding-right:100px;
+       color:gray;
+    } */
+
+    .testSubTaskDel {
+       margin-top:14.3px; 
+       margin-right: 45px;
+       margin-left: 10px;
+       color: rgb(179, 177, 177);
+       /* padding-left:10px;
+       padding-top:10px; */
+       /* width:10px; */
+    }
+ 
