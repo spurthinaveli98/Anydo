@@ -7,6 +7,7 @@ import fbLogo from '../../img/fb-logo.png';
 import googleLogo from '../../img/google-logo.png';
 import githubLogo from '../../img/github-logo.png';
 import Alert from 'react-s-alert';
+import history from '../../History.js';
 
 class Login extends Component {
     componentDidMount() {
@@ -27,17 +28,18 @@ class Login extends Component {
     
     render() {
         if(this.props.authenticated) {
-            return <Redirect
-                to={{
-                pathname: "/",
-                state: { from: this.props.location }
-            }}/>;            
+            // return <Redirect
+            //     to={{
+            //     pathname: "/",
+            //     state: { from: this.props.location }
+            // }}/>;   
+            history.push("/profile");         
         }
 
         return (
             <div className="login-container">
                 <div className="login-content">
-                    <h1 className="login-title">Login to SpringSocial</h1>
+                    <h1 className="login-title">Login to Anydo</h1>
                     <SocialLogin />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
@@ -71,10 +73,12 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            success: 'false',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.anydo = this.anydo.bind(this);
     }
 
     handleInputChange(event) {
@@ -87,7 +91,16 @@ class LoginForm extends Component {
         });        
     }
 
+
+    //  anydo(){
+    //     console.log("entered"); 
+    //      this.setState({success:'true'});
+    //      console.log(this.state.success);   
+    //  }
+
+
     handleSubmit(event) {
+       
         event.preventDefault();   
 
         const loginRequest = Object.assign({}, this.state);
@@ -96,7 +109,9 @@ class LoginForm extends Component {
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             Alert.success("You're successfully logged in!");
-            this.props.history.push("/");
+            console.log("entered");
+            history.push("/profile");
+            console.log(this.props.location);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });

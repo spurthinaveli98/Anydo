@@ -18,19 +18,15 @@ public class AnydoList {
     @JoinColumn(name = "listId", referencedColumnName = "listId")
     private List<AnydoItem> anydoItem;
 
-//    @OneToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "id", nullable = false)
-//    private User user;
-
     @Column
-    private Long id;
+    private long userId;
 
-    public Long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getListId() { return listId; }
@@ -43,5 +39,36 @@ public class AnydoList {
         this.listName = listName;
     }
 
-
 }
+
+
+//    @OneToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "id", nullable = false)
+//    private User user;
+//
+//    @OneToOne(mappedBy = "anydoList")
+//    private User user;
+
+//    private Long userId;
+
+//    @Column
+//    private Long userId;
+//
+//    public Long getId() {
+//        return userId;
+//    }
+//
+//    public void setId(Long id) {
+//        this.userId = userId;
+//    }
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(unique = true)
+//    private User user;
+
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }

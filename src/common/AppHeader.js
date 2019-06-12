@@ -15,7 +15,7 @@ class AppHeader extends Component {
                                 { this.props.authenticated ? (
                                     <ul>
                                         <li >
-                                            <NavLink to="/profile" onClick={this.props.hide}>TodoList</NavLink>
+                                            <NavLink to="/profile" >TodoList</NavLink>
                                         </li>
                                         <li>
                                             <a onClick={this.props.onLogout}>Logout</a>

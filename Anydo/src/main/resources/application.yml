@@ -8,17 +8,19 @@ spring:
         show-sql: true
         hibernate:
             ddl-auto: update
-            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#        properties:
+#            hibernate:
+#                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     security:
       oauth2:
         client:
           registration:
             google:
-              clientId: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
-              clientSecret: tWZKVLxaD_ARWsriiiUFYoIk
+#              clientId: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
+#              clientSecret: tWZKVLxaD_ARWsriiiUFYoIk
+              clientId: 386443500567-ddhu5qap0u8i4d4njqifgtsf68529orl.apps.googleusercontent.com
+              clientSecret: XhZPpq0m3w2IH0zSpQ41GyPz
               redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email

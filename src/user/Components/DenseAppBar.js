@@ -31,14 +31,13 @@ function DenseAppBar(props) {
             <button className="button" onClick={props.showListHandler}>
             <strong>+ New</strong>
             </button>
-            {/* <button className="logout"
-                    id="qsLogoutBtn"
-                    bsStyle="primary"
-                    className="btn-margin"
-                    onClick={props.logout}
+            <div className= "position">
+            <button className="button"
+                    onClick={props.onLogout}
                   >
                     Log Out
-                  </button> */}
+                  </button>
+                  </div>
         </Toolbar>
       </AppBar>
     </div>

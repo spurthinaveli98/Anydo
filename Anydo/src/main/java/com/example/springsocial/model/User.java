@@ -34,14 +34,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-//    @OneToOne(fetch = FetchType.LAZY,
-//            cascade =  CascadeType.ALL,
-//            mappedBy = "user")
-//    private AnydoList anydoList;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private AnydoList anydoList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private List<AnydoList> anydoList;
 
     private String providerId;
 
@@ -109,3 +104,19 @@ public class User {
         this.providerId = providerId;
     }
 }
+
+//    @OneToMany(mappedBy = "user")
+//    private AnydoList anydoList;
+
+//    @OneToOne(fetch = FetchType.LAZY,
+//            cascade =  CascadeType.ALL,
+//            mappedBy = "user")
+//    private AnydoList anydoList;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+//    private AnydoList anydoList;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(unique = true)
+//    private AnydoList anydoList;

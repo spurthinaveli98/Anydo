@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ListRepository extends JpaRepository<AnydoList,Long> {
 
-    @Query("SELECT i FROM  AnydoList i WHERE i.id = :id")
+    @Query("SELECT i FROM  AnydoList i WHERE i.userId = :id")
     List<AnydoList> findListOfUser(@Param("id") Long id);
 
     public AnydoList getOne(Long id);

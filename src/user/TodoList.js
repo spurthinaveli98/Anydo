@@ -520,7 +520,7 @@ AddTaskHandler = () => {
     return (
       <div className="TodoList">
         <div className="top">
-        <DenseAppBar click={() =>this.toggleMenuHandler()} showListHandler={this.showListHandler.bind(this)} logout={this.logout.bind(this)}/>
+        <DenseAppBar click={() =>this.toggleMenuHandler()} showListHandler={this.showListHandler.bind(this)} onLogout={this.props.onLogout}/>
         </div>
         <div className="row">
           <div className={this.state.showMenu?'left show-menu':'left hide-menu'}>
